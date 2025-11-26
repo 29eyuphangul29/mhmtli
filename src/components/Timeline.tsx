@@ -1,4 +1,4 @@
-import { Calendar } from 'lucide-react';
+import { Calendar, MapPin } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const Timeline = () => {
