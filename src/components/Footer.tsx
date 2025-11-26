@@ -6,7 +6,7 @@ const Footer = () => {
           © Mahmatlı Köyü | Kelkit / Gümüşhane
         </p>
         <p className="text-xs sm:text-sm text-stone-400 mt-2">
-          Bu site, köyümüzü tanıtmak ve hemşerilerimizi bir araya getirmek amacıyla hazırlanmış gayriresmî bir
+          Bu site, köyümüzü tanıtmak ve hemşerilerimizi bir araya getirmek amacıyla hazırlanmış bir
           web sitesidir.
         </p>
       </div>
