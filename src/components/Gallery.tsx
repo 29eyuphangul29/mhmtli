@@ -1,12 +1,18 @@
-import { Image, X, ZoomIn, ChevronLeft, ChevronRight, Loader } from 'lucide-react';
-import { useState } from 'react';
+import { Image, X, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, Loader } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
 
 const Gallery = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [zoom, setZoom] = useState(1); 
+  const [zoom, setZoom] = useState(1);
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [loadingImages, setLoadingImages] = useState<{ [key: number]: boolean }>({});
+  const [panX, setPanX] = useState(0);
+  const [panY, setPanY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
 const galleryItems = [
     { id: 1, caption: 'Köy Manzarası', images: ['https://i.ibb.co/ZpxwsHPH/mahmatli-koyu-fotograf.jpg', 'https://i.ibb.co/cKkCN8D3/mahmatli-koy-manzarasi.jpg', 'https://i.ibb.co/CpVwzy9X/kelkit-mahmatli-koyu-foto.jpg', 'https://i.ibb.co/Nw6Vvj5/kelkit-mahmatli-koyu-genis-aci.jpg', 'https://i.ibb.co/23KW6vR0/kelkit-mahmatli-koyu-panaroma.jpg', 'https://i.ibb.co/fGyqqBZk/mahmatli-koyu.jpg' ] },
@@ -23,30 +29,85 @@ const galleryItems = [
     setCurrentImageIndex(0);
     setLightboxOpen(true);
     setZoom(1);
+    setPanX(0);
+    setPanY(0);
     setLoadingImages(prev => ({ ...prev, lightbox: true }));
   };
 
   const closeLightbox = () => {
     setLightboxOpen(false);
     setZoom(1);
+    setPanX(0);
+    setPanY(0);
     setSelectedImages([]);
     setCurrentImageIndex(0);
   };
 
-  const handleZoom = () => {
-    setZoom(prev => (prev === 1 ? 2 : 1));
+  const handleZoomIn = () => {
+    setZoom(prev => Math.min(prev + 0.5, 4));
   };
+
+  const handleZoomOut = () => {
+    setZoom(prev => Math.max(prev - 0.5, 1));
+  };
+
+  const handleResetZoom = () => {
+    setZoom(1);
+    setPanX(0);
+    setPanY(0);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoom <= 1) return;
+    setIsDragging(true);
+    setDragStart({ x: e.clientX - panX, y: e.clientY - panY });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || zoom <= 1) return;
+    const newX = e.clientX - dragStart.x;
+    const newY = e.clientY - dragStart.y;
+    setPanX(newX);
+    setPanY(newY);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.2 : 0.2;
+    setZoom(prev => Math.min(Math.max(prev + delta, 1), 4));
+  };
+
+  useEffect(() => {
+    if (!lightboxOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === '+' || e.key === '=') handleZoomIn();
+      if (e.key === '-') handleZoomOut();
+      if (e.key === '0') handleResetZoom();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen]);
 
   const handleNextImage = () => {
     setLoadingImages(prev => ({ ...prev, lightbox: true }));
     setCurrentImageIndex(prev => (prev + 1) % selectedImages.length);
     setZoom(1);
+    setPanX(0);
+    setPanY(0);
   };
 
   const handlePrevImage = () => {
     setLoadingImages(prev => ({ ...prev, lightbox: true }));
     setCurrentImageIndex(prev => (prev - 1 + selectedImages.length) % selectedImages.length);
     setZoom(1);
+    setPanX(0);
+    setPanY(0);
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
@@ -119,19 +180,37 @@ const galleryItems = [
           <div className="relative max-w-4xl max-h-screen flex items-center justify-center">
             <button
               onClick={closeLightbox}
-              className="absolute top-4 right-4 z-10 text-white hover:text-gray-300 transition-colors"
+              className="absolute top-4 right-4 z-20 text-white hover:text-gray-300 transition-colors hover:scale-110 active:scale-95"
               aria-label="Close lightbox"
             >
               <X size={32} />
             </button>
 
-            <button
-              onClick={handleZoom}
-              className="absolute bottom-4 right-4 z-10 bg-white/20 hover:bg-white/30 text-white p-3 rounded-lg transition-colors backdrop-blur-sm"
-              aria-label="Zoom"
-            >
-              <ZoomIn size={24} />
-            </button>
+            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
+              <button
+                onClick={handleZoomOut}
+                className="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-colors backdrop-blur-sm hover:scale-110 active:scale-95"
+                aria-label="Zoom out"
+                disabled={zoom <= 1}
+              >
+                <ZoomOut size={20} />
+              </button>
+              <button
+                onClick={handleResetZoom}
+                className="bg-white/20 hover:bg-white/30 text-white px-3 py-2 rounded-lg transition-colors backdrop-blur-sm hover:scale-110 active:scale-95 text-sm font-medium"
+                aria-label="Reset zoom"
+              >
+                Reset
+              </button>
+              <button
+                onClick={handleZoomIn}
+                className="bg-white/20 hover:bg-white/30 text-white p-2 rounded-lg transition-colors backdrop-blur-sm hover:scale-110 active:scale-95"
+                aria-label="Zoom in"
+                disabled={zoom >= 4}
+              >
+                <ZoomIn size={20} />
+              </button>
+            </div>
 
             {selectedImages.length > 1 && (
               <>
@@ -157,20 +236,41 @@ const galleryItems = [
               </> 
             )}
 
-            <div className="overflow-auto max-h-screen max-w-4xl relative flex items-center justify-center min-h-[400px]">
+            <div className="absolute top-4 left-4 z-20 bg-white/20 backdrop-blur-sm rounded-lg p-3 text-white text-sm font-medium">
+              Zoom: {(zoom * 100).toFixed(0)}%
+            </div>
+
+            <div
+              ref={imageContainerRef}
+              className="overflow-hidden max-h-screen max-w-5xl relative flex items-center justify-center min-h-[400px] bg-black/30 rounded-lg cursor-grab active:cursor-grabbing"
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              onWheel={handleWheel}
+            >
               {loadingImages['lightbox'] && (
                 <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-20 backdrop-blur-sm">
                   <Loader className="text-white animate-spin" size={48} />
                 </div>
               )}
               <img
+                ref={imageRef}
                 src={selectedImages[currentImageIndex]}
                 alt="Gallery lightbox"
-                className={`w-full h-auto transition-all duration-300 ${loadingImages['lightbox'] ? 'opacity-0 blur-sm' : 'opacity-100'}`}
-                style={{ transform: `scale(${zoom})` }}
+                className={`max-w-full max-h-full transition-all duration-300 ${loadingImages['lightbox'] ? 'opacity-0 blur-sm' : 'opacity-100'}`}
+                style={{
+                  transform: `scale(${zoom}) translate(${panX}px, ${panY}px)`,
+                  cursor: zoom > 1 ? 'grab' : 'default',
+                }}
                 onLoad={() => setLoadingImages(prev => ({ ...prev, lightbox: false }))}
                 onLoadStart={() => setLoadingImages(prev => ({ ...prev, lightbox: true }))}
               />
+              {zoom > 1 && (
+                <div className="absolute bottom-4 right-4 z-10 bg-white/20 text-white px-3 py-1 rounded text-xs backdrop-blur-sm">
+                  Drag to pan • Scroll to zoom • +/- keys • 0 to reset
+                </div>
+              )}
             </div>
           </div>
         </div>
