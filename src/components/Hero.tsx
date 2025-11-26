@@ -13,7 +13,7 @@ const Hero = () => {
       id="anasayfa"
       className="relative min-h-screen flex items-center justify-center pt-16 bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage: `url('https://i.ibb.co/VYJ6GR9R/mahmatli-koyu.jpg')`
+        backgroundImage: `url('https://res.cloudinary.com/daqysaygc/image/upload/v1764187060/mahmatli-koyu-fotograf_bahpxd.jpg')`
       }}
     >
       <div className="absolute inset-0 bg-black/40"></div>
