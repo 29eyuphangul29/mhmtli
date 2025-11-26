@@ -14,7 +14,8 @@ const Gallery = () => {
     { id: 3, caption: 'Dedenin Çayırı 4. Köprü', images: ['/mahmatli-koyu-fotograflari.jpg'] },
     { id: 4, caption: 'Harmanda Tek Kale Futbol', images: ['/kelkit-mahmatli-koyu.jpg'] },
     { id: 5, caption: 'Ziyaretin Kıran', images: ['/mahmatli-koyu-ziyaretin-kiran.jpg'] },
-    { id: 6, caption: 'Doğal Yaşam', images: ['IMAGE_URL_PLACEHOLDER_6'] },
+    { id: 6, caption: 'Gelincik Tarlası', images: ['/kelkit-gelincik-tarlasi.jpg'] },
+    { id: 7, caption: 'Doğal Yaşam', images: ['/gumushane-mahmatli-koyu.jpg'] },
   ];
 
   const openLightbox = (images: string[]) => {
@@ -153,7 +154,7 @@ const Gallery = () => {
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 bg-white/20 text-white px-4 py-2 rounded-lg backdrop-blur-sm text-sm">
                   {currentImageIndex + 1} / {selectedImages.length}
                 </div>
-              </>
+              </> 
             )}
 
             <div className="overflow-auto max-h-screen max-w-4xl relative flex items-center justify-center min-h-[400px]">
