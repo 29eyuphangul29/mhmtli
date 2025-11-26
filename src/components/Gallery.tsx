@@ -8,14 +8,14 @@ const Gallery = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [loadingImages, setLoadingImages] = useState<{ [key: number]: boolean }>({});
 
-  const galleryItems = [
-    { id: 1, caption: 'Köy Manzarası', images: ['/mahmatli-koyu-fotograf.jpg', '/mahmatli-koy-manzarasi.jpg', '/kelkit-mahmatli-koyu-foto.jpg', '/kelkit-mahmatli-koyu-genis-aci.jpg' ] },
-    { id: 2, caption: 'Kışın Mahmatlı', images: ['/kisin-mahmatli-min.jpg', '/kisin-mahmatli-manzarasi.jpg'] },
-    { id: 3, caption: 'Dedenin Çayırı 4. Köprü', images: ['/mahmatli-koyu-fotograflari.jpg'] },
-    { id: 4, caption: 'Harmanda Tek Kale Futbol', images: ['/kelkit-mahmatli-koyu.jpg'] },
-    { id: 5, caption: 'Ziyaretin Kıran', images: ['/mahmatli-koyu-ziyaretin-kiran.jpg'] },
-    { id: 6, caption: 'Gelincik Tarlası', images: ['/kelkit-gelincik-tarlasi.jpg'] },
-    { id: 7, caption: 'Doğal Yaşam', images: ['/gumushane-mahmatli-koyu.jpg'] },
+const galleryItems = [
+    { id: 1, caption: 'Köy Manzarası', images: ['https://i.ibb.co/ZpxwsHPH/mahmatli-koyu-fotograf.jpg', 'https://i.ibb.co/cKkCN8D3/mahmatli-koy-manzarasi.jpg', 'https://i.ibb.co/CpVwzy9X/kelkit-mahmatli-koyu-foto.jpg', 'https://i.ibb.co/Nw6Vvj5/kelkit-mahmatli-koyu-genis-aci.jpg', 'https://i.ibb.co/23KW6vR0/kelkit-mahmatli-koyu-panaroma.jpg', 'https://i.ibb.co/fGyqqBZk/mahmatli-koyu.jpg' ] },
+    { id: 2, caption: 'Kışın Mahmatlı', images: ['https://i.ibb.co/MxSqx4p1/kisin-mahmatli-min.jpg', 'https://i.ibb.co/wN6dKYxr/kisin-mahmatli-manzarasi.jpg', 'https://i.ibb.co/B5DqTH64/kisin-mahmatli.jpg'] },
+    { id: 3, caption: 'Dedenin Çayırı 4. Köprü', images: ['https://i.ibb.co/k2L708n5/mahmatli-koyu-fotograflari.jpg'] },
+    { id: 4, caption: 'Harmanda Tek Kale Futbol', images: ['https://i.ibb.co/wFkYSdv1/kelkit-mahmatli-koyu.jpg'] },
+    { id: 5, caption: 'Ziyaretin Kıran', images: ['https://i.ibb.co/LDHRH17r/mahmatli-koyu-ziyaretin-kiran.jpg'] },
+    { id: 6, caption: 'Gelincik Tarlası', images: ['https://i.ibb.co/0RWxxP6q/kelkit-gelincik-tarlasi.jpg'] },
+    { id: 7, caption: 'Doğal Yaşam', images: ['https://i.ibb.co/67NZ4YmL/gumushane-mahmatli-koyu.jpg'] },
   ];
 
   const openLightbox = (images: string[]) => {
