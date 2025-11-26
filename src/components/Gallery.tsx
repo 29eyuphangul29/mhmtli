@@ -21,7 +21,7 @@ const galleryItems = [
     { id: 4, caption: 'Harmanda Tek Kale Futbol', images: ['https://res.cloudinary.com/daqysaygc/image/upload/v1764187062/kelkit-mahmatli-koyu_rq7i0p.jpg'] },
     { id: 5, caption: 'Ziyaretin Kıran', images: ['https://res.cloudinary.com/daqysaygc/image/upload/v1764187062/mahmatli-koyu-ziyaretin-kiran_hhnhc7.jpg'] },
     { id: 6, caption: 'Gelincik Tarlası', images: ['https://res.cloudinary.com/daqysaygc/image/upload/v1764187062/kelkit-gelincik-tarlasi_example.jpg'] },
-    { id: 7, caption: 'Doğal Yaşam', images: ['https://res.cloudinary.com/daqysaygc/image/upload/v1764187063/gumushane-mahmatli-koyu_ciuysu.jpg'] },
+    { id: 7, caption: 'Doğal Yaşam', images: ['https://res.cloudinary.com/daqysaygc/image/upload/fl_preserve_transparency/v1764187063/gumushane-mahmatli-koyu_ciuysu.jpg?_s=public-apps'] },
   ];
 
   const openLightbox = (images: string[]) => {
