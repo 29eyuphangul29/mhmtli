@@ -3,16 +3,16 @@ import { useState } from 'react';
 
 const Gallery = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoom] = useState(1); 
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [loadingImages, setLoadingImages] = useState<{ [key: number]: boolean }>({});
 
   const galleryItems = [
-    { id: 1, caption: 'Köy Manzarası', images: ['/mahmatli-koyu-fotograf.jpg', '/mahmatli-koy-manzarasi.JPG'] },
+    { id: 1, caption: 'Köy Manzarası', images: ['/mahmatli-koyu-fotograf.jpg', '/mahmatli-koy-manzarasi.JPG', '/kelkit-mahmatli-koyu-foto.JPG', '/kelkit-mahmatli-koyu-genis-aci.jpg' ] },
     { id: 2, caption: 'Kışın Mahmatlı', images: ['/kisin-mahmatli-min.JPG', '/kisin-mahmatli-manzarasi.JPG'] },
     { id: 3, caption: 'Dedenin Çayırı 4. Köprü', images: ['/mahmatli-koyu-fotograflari.JPG'] },
-    { id: 4, caption: 'Harmanda Tek Kale Futbol', images: ['IMAGE_URL_PLACEHOLDER_4'] },
+    { id: 4, caption: 'Harmanda Tek Kale Futbol', images: ['/kelkit-mahmatli-koyu.JPG'] },
     { id: 5, caption: 'Evlerden Görünüm', images: ['IMAGE_URL_PLACEHOLDER_5'] },
     { id: 6, caption: 'Doğal Yaşam', images: ['IMAGE_URL_PLACEHOLDER_6'] },
   ];
@@ -22,6 +22,7 @@ const Gallery = () => {
     setCurrentImageIndex(0);
     setLightboxOpen(true);
     setZoom(1);
+    setLoadingImages(prev => ({ ...prev, lightbox: true }));
   };
 
   const closeLightbox = () => {
@@ -36,11 +37,13 @@ const Gallery = () => {
   };
 
   const handleNextImage = () => {
+    setLoadingImages(prev => ({ ...prev, lightbox: true }));
     setCurrentImageIndex(prev => (prev + 1) % selectedImages.length);
     setZoom(1);
   };
 
   const handlePrevImage = () => {
+    setLoadingImages(prev => ({ ...prev, lightbox: true }));
     setCurrentImageIndex(prev => (prev - 1 + selectedImages.length) % selectedImages.length);
     setZoom(1);
   };
@@ -153,16 +156,16 @@ const Gallery = () => {
               </>
             )}
 
-            <div className="overflow-auto max-h-screen max-w-4xl relative">
+            <div className="overflow-auto max-h-screen max-w-4xl relative flex items-center justify-center min-h-[400px]">
               {loadingImages['lightbox'] && (
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-20">
+                <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-20 backdrop-blur-sm">
                   <Loader className="text-white animate-spin" size={48} />
                 </div>
               )}
               <img
                 src={selectedImages[currentImageIndex]}
                 alt="Gallery lightbox"
-                className="w-full h-auto transition-transform duration-300"
+                className={`w-full h-auto transition-all duration-300 ${loadingImages['lightbox'] ? 'opacity-0 blur-sm' : 'opacity-100'}`}
                 style={{ transform: `scale(${zoom})` }}
                 onLoad={() => setLoadingImages(prev => ({ ...prev, lightbox: false }))}
                 onLoadStart={() => setLoadingImages(prev => ({ ...prev, lightbox: true }))}
