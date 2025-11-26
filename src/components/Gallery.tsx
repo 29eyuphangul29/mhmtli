@@ -15,13 +15,13 @@ const Gallery = () => {
   const imageRef = useRef<HTMLImageElement>(null);
 
 const galleryItems = [
-    { id: 1, caption: 'Köy Manzarası', images: ['https://i.ibb.co/ZpxwsHPH/mahmatli-koyu-fotograf.jpg', 'https://i.ibb.co/cKkCN8D3/mahmatli-koy-manzarasi.jpg', 'https://i.ibb.co/CpVwzy9X/kelkit-mahmatli-koyu-foto.jpg', 'https://i.ibb.co/Nw6Vvj5/kelkit-mahmatli-koyu-genis-aci.jpg', 'https://i.ibb.co/23KW6vR0/kelkit-mahmatli-koyu-panaroma.jpg', 'https://i.ibb.co/fGyqqBZk/mahmatli-koyu.jpg' ] },
-    { id: 2, caption: 'Kışın Mahmatlı', images: ['https://i.ibb.co/MxSqx4p1/kisin-mahmatli-min.jpg', 'https://i.ibb.co/wN6dKYxr/kisin-mahmatli-manzarasi.jpg', 'https://i.ibb.co/B5DqTH64/kisin-mahmatli.jpg'] },
-    { id: 3, caption: 'Dedenin Çayırı 4. Köprü', images: ['https://i.ibb.co/k2L708n5/mahmatli-koyu-fotograflari.jpg'] },
-    { id: 4, caption: 'Harmanda Tek Kale Futbol', images: ['https://i.ibb.co/wFkYSdv1/kelkit-mahmatli-koyu.jpg'] },
-    { id: 5, caption: 'Ziyaretin Kıran', images: ['https://i.ibb.co/LDHRH17r/mahmatli-koyu-ziyaretin-kiran.jpg'] },
-    { id: 6, caption: 'Gelincik Tarlası', images: ['https://i.ibb.co/0RWxxP6q/kelkit-gelincik-tarlasi.jpg'] },
-    { id: 7, caption: 'Doğal Yaşam', images: ['https://i.ibb.co/67NZ4YmL/gumushane-mahmatli-koyu.jpg'] },
+    { id: 1, caption: 'Köy Manzarası', images: ['https://res.cloudinary.com/daqysaygc/image/upload/v1764187060/mahmatli-koyu-fotograf_bahpxd.jpg', 'https://res.cloudinary.com/daqysaygc/image/upload/v1764187048/mahmatli-koy-manzarasi_hobd9j.jpg', 'https://res.cloudinary.com/daqysaygc/image/upload/v1764187018/kelkit-mahmatli-koyu-genis-aci_sfap0u.jpg', 'https://res.cloudinary.com/daqysaygc/image/upload/v1764187061/mahmatli-koyu_tw4q12.jpg' ] },
+    { id: 2, caption: 'Kışın Mahmatlı', images: ['https://res.cloudinary.com/daqysaygc/image/upload/v1764187019/kisin-mahmatli-min_phrxsd.jpg', 'https://res.cloudinary.com/daqysaygc/image/upload/v1764187063/kisin-mahmatli-manzarasi_nqsi1j.jpg'] },
+    { id: 3, caption: 'Dedenin Çayırı 4. Köprü', images: ['https://res.cloudinary.com/daqysaygc/image/upload/v1764187051/mahmatli-koyu-fotograflari_hsbqab.jpg'] },
+    { id: 4, caption: 'Harmanda Tek Kale Futbol', images: ['https://res.cloudinary.com/daqysaygc/image/upload/v1764187062/kelkit-mahmatli-koyu_rq7i0p.jpg'] },
+    { id: 5, caption: 'Ziyaretin Kıran', images: ['https://res.cloudinary.com/daqysaygc/image/upload/v1764187062/mahmatli-koyu-ziyaretin-kiran_hhnhc7.jpg'] },
+    { id: 6, caption: 'Gelincik Tarlası', images: ['https://res.cloudinary.com/daqysaygc/image/upload/v1764187062/kelkit-gelincik-tarlasi_example.jpg'] },
+    { id: 7, caption: 'Doğal Yaşam', images: ['https://res.cloudinary.com/daqysaygc/image/upload/v1764187063/gumushane-mahmatli-koyu_ciuysu.jpg'] },
   ];
 
   const openLightbox = (images: string[]) => {
