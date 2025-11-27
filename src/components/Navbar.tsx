@@ -44,9 +44,16 @@ const Navbar = () => {
               e.preventDefault();
               scrollToSection('#anasayfa');
             }}
-            className="text-lg sm:text-xl font-bold text-primary-700"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
-            Mahmatlı Köyü
+            <img
+              src="/mahmatli-koyu-logo.png"
+              alt="Mahmatlı Köyü"
+              className="h-10 sm:h-12 w-auto"
+            />
+            <span className="hidden sm:inline text-sm sm:text-base font-bold text-primary-700">
+              Mahmatlı Köyü
+            </span>
           </a>
 
           <div className="hidden md:flex space-x-1 lg:space-x-2">
