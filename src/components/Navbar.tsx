@@ -53,7 +53,6 @@ const Navbar = () => {
               alt="Mahmatlı Köyü"
               className="h-10 sm:h-12 w-auto"
             />
-            </span>
           </a>
 
           <div className="hidden md:flex space-x-1 lg:space-x-2">
