@@ -52,7 +52,6 @@ const Navbar = () => {
               className="h-10 sm:h-12 w-auto"
             />
             <span className="hidden sm:inline text-sm sm:text-base font-bold text-primary-700">
-              Mahmatlı Köyü
             </span>
           </a>
 
