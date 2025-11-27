@@ -34,8 +34,8 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-primary-900 shadow-lg shadow-primary-900/20'
-          : 'bg-primary-900/95 backdrop-blur-md border-b border-primary-800'
+          ? 'bg-white shadow-lg'
+          : 'bg-white/95 backdrop-blur-md border-b border-gray-200'
       }`}
     >
       <div className="max-w-[1000px] mx-auto px-4 sm:px-6">
@@ -53,7 +53,7 @@ const Navbar = () => {
               alt="Mahmatlı Köyü"
               className="h-10 sm:h-12 w-auto"
             />
-            <span className="hidden sm:inline text-sm sm:text-base font-bold text-white">
+            <span className="hidden sm:inline text-sm sm:text-base font-bold text-primary-900">
               Mahmatlı Köyü
             </span>
           </a>
@@ -67,7 +67,7 @@ const Navbar = () => {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className="px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-primary-800/50 rounded-md transition-colors duration-200"
+                className="px-3 py-2 text-sm text-gray-700 hover:text-primary-900 hover:bg-primary-100 rounded-md transition-colors duration-200"
               >
                 {item.label}
               </a>
@@ -76,7 +76,7 @@ const Navbar = () => {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-white/80 hover:text-white transition-colors"
+            className="md:hidden p-2 text-gray-700 hover:text-primary-900 transition-colors"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -84,7 +84,7 @@ const Navbar = () => {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-primary-800/50 backdrop-blur-sm border-t border-primary-700">
+        <div className="md:hidden bg-gray-50 backdrop-blur-sm border-t border-gray-200">
           <div className="px-4 py-3 space-y-1">
             {navItems.map((item) => (
               <a
@@ -94,7 +94,7 @@ const Navbar = () => {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className="block px-3 py-2 text-white/80 hover:text-white hover:bg-primary-700/50 rounded-md transition-colors duration-200"
+                className="block px-3 py-2 text-gray-700 hover:text-primary-900 hover:bg-primary-100 rounded-md transition-colors duration-200"
               >
                 {item.label}
               </a>
